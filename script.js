@@ -376,24 +376,60 @@ function initFooterProjectsCarousel() {
     const next = document.querySelector('.footer-projects__arrow--next');
     if (!track || !prev || !next) return;
 
-    const items = Array.from(track.children);
-    let index = 0;
+    // Дублируем элементы, чтобы сделать бесконечную ленту
+    const originalItems = Array.from(track.children);
+    const copies = 3; // сколько раз продублировать набор
+    track.innerHTML = '';
+    for (let i = 0; i < copies; i++) {
+        originalItems.forEach(item => {
+            track.appendChild(item.cloneNode(true));
+        });
+    }
 
-    const update = () => {
-        const itemWidth = items[0].getBoundingClientRect().width + 16;
-        track.style.transform = `translateX(${-index * itemWidth}px)`;
+    const items = Array.from(track.children);
+    let offset = 0;
+    let itemWidth = 0;
+
+    const recalc = () => {
+        if (!items.length) return;
+        itemWidth = items[0].getBoundingClientRect().width + 16;
     };
 
+    recalc();
+    window.addEventListener('resize', recalc);
+
+    const totalWidth = () => itemWidth * items.length;
+    const loopSpan = () => itemWidth * originalItems.length;
+
+    const applyOffset = () => {
+        // когда пролистали длину одного набора — возвращаемся в начало
+        if (Math.abs(offset) >= loopSpan()) {
+            offset += loopSpan() * Math.sign(offset);
+        }
+        track.style.transform = `translateX(${offset}px)`;
+    };
+
+    const stepBy = (delta) => {
+        offset += delta;
+        applyOffset();
+    };
+
+    // Автопрокрутка
+    const speed = -0.4; // пикселей за кадр
+    let rafId;
+    const tick = () => {
+        offset += speed;
+        applyOffset();
+        rafId = requestAnimationFrame(tick);
+    };
+    tick();
+
+    // Стрелки смещают на ширину одного элемента
     prev.addEventListener('click', () => {
-        index = (index - 1 + items.length) % items.length;
-        update();
+        stepBy(itemWidth);
     });
 
     next.addEventListener('click', () => {
-        index = (index + 1) % items.length;
-        update();
+        stepBy(-itemWidth);
     });
-
-    window.addEventListener('resize', update);
-    update();
 }
