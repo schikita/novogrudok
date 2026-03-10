@@ -1,404 +1,755 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Новогрудок — самый туманный город в Беларуси. Первая столица ВКЛ, древние замки, храмы и неповторимая атмосфера.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Новогрудок — самый туманный город в Беларуси. Первая столица ВКЛ, древние замки, храмы и неповторимая атмосфера."
+    />
     <title>Новогрудок — самый туманный город в Беларуси</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    </head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <!-- Header -->
     <header class="header">
-        <div class="header__inner">
-            <a href="#hero" class="logo">Новогрудок</a>
-            <nav class="nav">
-                <button class="nav__close" type="button" aria-label="Закрыть меню">×</button>
-                <a href="#attractions">Маршруты</a>
-                <a href="#gallery">Галерея</a>
-                <a href="#game">Игра</a>
-                <a href="#contact">Контакты</a>
-            </nav>
-            <button class="burger" aria-label="Меню">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+      <div class="header__inner">
+        <a href="#hero" class="logo">Новогрудок</a>
+        <nav class="nav">
+          <button class="nav__close" type="button" aria-label="Закрыть меню">
+            ×
+          </button>
+          <a href="#attractions">Маршруты</a>
+          <a href="#gallery">Галерея</a>
+          <a href="#game">Игра</a>
+          <a href="#contact">Контакты</a>
+        </nav>
+        <button class="burger" aria-label="Меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </header>
 
     <!-- Hero - Jonite-style layout with clip-path reveal -->
     <section class="hero" id="hero" data-hero>
-        <div class="hero__bg">
-            <div class="hero__slide active" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&h=1080&fit=crop')"></div>
-            <div class="hero__slide" style="background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&h=1080&fit=crop')"></div>
-            <div class="hero__slide" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop')"></div>
-            <div class="hero__slide" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1920&h=1080&fit=crop')"></div>
-        </div>
-        <div class="hero__overlay"></div>
-        <div class="hero__grid">
-            <div class="hero__left">
-                <div class="hero__text-block" data-hero-left>
-                    <h1 class="hero__title" data-hero-h1><span>Самый туманный город в Беларуси.</span></h1>
-                    <div class="hero__time-block" data-hero-time>
-                        <div class="hero__time-item">
-                            <span class="hero__time-label">Новогрудок</span>
-                            <span class="hero__time" id="heroTime">00 : 00 : 00</span>
-                            <a href="tel:+375291234567" class="hero__phone">+375 29 123-45-67</a>
-                        </div>
-                        <div class="hero__time-item">
-                            <span class="hero__time-label">Гродно</span>
-                            <span class="hero__time" id="heroTime2">00 : 00 : 00</span>
-                            <a href="tel:+375291234567" class="hero__phone">+375 29 123-45-67</a>
-                        </div>
-                        <span class="hero__est">Осн. XIII век</span>
-                    </div>
-                </div>
-                <a href="#attractions" class="hero__box hero__box--left" data-hero-leftbox style="--height: 0">
-                    <div class="hero__box-bg" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&h=432&fit=crop')"></div>
-                    <div class="hero__box-content">
-                        <span>Исследовать</span>
-                        <svg class="hero__box-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 8H13.5M13.5 8L9 3.5M13.5 8L9 12.5" stroke="currentColor" stroke-width="0.8" stroke-linejoin="bevel"/></svg>
-                    </div>
-                </a>
+      <div class="hero__bg">
+        <div
+          class="hero__slide active"
+          style="
+            background-image: url(&quot;https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&h=1080&fit=crop&quot;);
+          "
+        ></div>
+        <div
+          class="hero__slide"
+          style="
+            background-image: url(&quot;https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&h=1080&fit=crop&quot;);
+          "
+        ></div>
+        <div
+          class="hero__slide"
+          style="
+            background-image: url(&quot;https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&quot;);
+          "
+        ></div>
+        <div
+          class="hero__slide"
+          style="
+            background-image: url(&quot;https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1920&h=1080&fit=crop&quot;);
+          "
+        ></div>
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__grid">
+        <div class="hero__left">
+          <div class="hero__text-block" data-hero-left>
+            <h1 class="hero__title" data-hero-h1>
+              <span>Самый туманный город в Беларуси.</span>
+            </h1>
+            <div class="hero__time-block" data-hero-time>
+              <div class="hero__time-item">
+                <span class="hero__time-label">Новогрудок</span>
+                <span class="hero__time" id="heroTime">00 : 00 : 00</span>
+                <a href="tel:+375291234567" class="hero__phone"
+                  >+375 29 123-45-67</a
+                >
+              </div>
+              <div class="hero__time-item">
+                <span class="hero__time-label">Гродно</span>
+                <span class="hero__time" id="heroTime2">00 : 00 : 00</span>
+                <a href="tel:+375291234567" class="hero__phone"
+                  >+375 29 123-45-67</a
+                >
+              </div>
+              <span class="hero__est">Осн. XIII век</span>
             </div>
-            <div class="hero__right">
-                <a href="#gallery" class="hero__box hero__box--right" data-hero-rightbox style="--height: 0">
-                    <div class="hero__box-bg hero__box-slides">
-                        <div class="hero__box-slide active" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=800&fit=crop')"></div>
-                        <div class="hero__box-slide" style="background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=800&fit=crop')"></div>
-                        <div class="hero__box-slide" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=800&fit=crop')"></div>
-                    </div>
-                    <div class="hero__box-content">
-                        <span>Галерея</span>
-                        <svg class="hero__box-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 8H13.5M13.5 8L9 3.5M13.5 8L9 12.5" stroke="currentColor" stroke-width="0.8" stroke-linejoin="bevel"/></svg>
-                    </div>
-                </a>
+          </div>
+          <a
+            href="#attractions"
+            class="hero__box hero__box--left"
+            data-hero-leftbox
+            style="--height: 0"
+          >
+            <div
+              class="hero__box-bg"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&h=432&fit=crop&quot;);
+              "
+            ></div>
+            <div class="hero__box-content">
+              <span>Исследовать</span>
+              <svg
+                class="hero__box-arrow"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+              >
+                <path
+                  d="M2.5 8H13.5M13.5 8L9 3.5M13.5 8L9 12.5"
+                  stroke="currentColor"
+                  stroke-width="0.8"
+                  stroke-linejoin="bevel"
+                />
+              </svg>
             </div>
+          </a>
         </div>
-        <div class="hero__scroll">
-            <span>Прокрутите вниз</span>
-            <div class="hero__scroll-line"></div>
+        <div class="hero__right">
+          <a
+            href="#gallery"
+            class="hero__box hero__box--right"
+            data-hero-rightbox
+            style="--height: 0"
+          >
+            <div class="hero__box-bg hero__box-slides">
+              <div
+                class="hero__box-slide active"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=800&fit=crop&quot;);
+                "
+              ></div>
+              <div
+                class="hero__box-slide"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=800&fit=crop&quot;);
+                "
+              ></div>
+              <div
+                class="hero__box-slide"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=800&fit=crop&quot;);
+                "
+              ></div>
+            </div>
+            <div class="hero__box-content">
+              <span>Галерея</span>
+              <svg
+                class="hero__box-arrow"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+              >
+                <path
+                  d="M2.5 8H13.5M13.5 8L9 3.5M13.5 8L9 12.5"
+                  stroke="currentColor"
+                  stroke-width="0.8"
+                  stroke-linejoin="bevel"
+                />
+              </svg>
+            </div>
+          </a>
         </div>
+      </div>
+      <div class="hero__scroll">
+        <span>Прокрутите вниз</span>
+        <div class="hero__scroll-line"></div>
+      </div>
     </section>
 
     <!-- Clients / Partners -->
     <section class="clients" data-scroll-section>
-        <div class="container">
-            <h2 class="section-title" data-reveal>Город, который живёт в тумане</h2>
-            <p class="section-subtitle" data-reveal>Как репортёр, я много езжу по Беларуси. Но именно здесь, в Новогрудке, туман становится не погодой — а героем сюжета.</p>
-            <div class="clients__logos" data-reveal>
-                <div class="clients__logo">Утро на замковых холмах</div>
-                <div class="clients__logo">Туман над костёлом</div>
-                <div class="clients__logo">Долины у подножия горы</div>
-                <div class="clients__logo">Улицы, которые растворяются в дымке</div>
-            </div>
+      <div class="container">
+        <h2 class="section-title" data-reveal>Город, который живёт в тумане</h2>
+        <p class="section-subtitle" data-reveal>
+          Как репортёр, я много езжу по Беларуси. Но именно здесь, в Новогрудке,
+          туман становится не погодой — а героем сюжета.
+        </p>
+        <div class="clients__logos" data-reveal>
+          <div class="clients__logo">Утро на замковых холмах</div>
+          <div class="clients__logo">Туман над костёлом</div>
+          <div class="clients__logo">Долины у подножия горы</div>
+          <div class="clients__logo">Улицы, которые растворяются в дымке</div>
         </div>
+      </div>
     </section>
 
     <!-- Made to matter -->
     <section class="matter" data-scroll-section>
-        <div class="container">
-            <h2 class="section-title" data-reveal>Где начинается мой репортаж</h2>
-            <p class="matter__text" data-reveal>Новогрудок лежит на холмах, между лесами и долинами. Здесь воздух влажнее, чем в соседних районах, и каждый подъём на горку — это ещё один ракурс на то, как туман стелется по крышам, полям и руинам замка.</p>
-        </div>
+      <div class="container">
+        <h2 class="section-title" data-reveal>Где начинается мой репортаж</h2>
+        <p class="matter__text" data-reveal>
+          Новогрудок лежит на холмах, между лесами и долинами. Здесь воздух
+          влажнее, чем в соседних районах, и каждый подъём на горку — это ещё
+          один ракурс на то, как туман стелется по крышам, полям и руинам замка.
+        </p>
+      </div>
     </section>
 
     <!-- Products / Attractions -->
     <section class="products" id="attractions" data-scroll-section>
-        <div class="container">
-            <h2 class="section-title" data-reveal>Город в кадре</h2>
-            <p class="section-subtitle products__subtitle" data-reveal>Каждая точка на карте здесь — готовый план для сюжета: замок в белой пелене, костёл, который вырастает из тумана, музей поэта и холм, где туман держится дольше всех.</p>
-            <div class="products__grid">
-                <a href="#" class="product-card" data-parallax-img>
-                    <div class="product-card__image" data-depth="0.3" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&h=400&fit=crop')"></div>
-                    <span class="product-card__category">Замки</span>
-                    <h3 class="product-card__title">Новогрудский замок</h3>
-                </a>
-                <a href="#" class="product-card" data-parallax-img>
-                    <div class="product-card__image" data-depth="0.3" style="background-image: url('https://images.unsplash.com/photo-1548013146-72479768bada?w=600&h=400&fit=crop')"></div>
-                    <span class="product-card__category">Храмы</span>
-                    <h3 class="product-card__title">Фарный костёл</h3>
-                </a>
-                <a href="#" class="product-card" data-parallax-img>
-                    <div class="product-card__image" data-depth="0.3" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop')"></div>
-                    <span class="product-card__category">Музеи</span>
-                    <h3 class="product-card__title">Дом Мицкевича</h3>
-                </a>
-                <a href="#" class="product-card" data-parallax-img>
-                    <div class="product-card__image" data-depth="0.3" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=400&fit=crop')"></div>
-                    <span class="product-card__category">Природа</span>
-                    <h3 class="product-card__title">Гора Миндовга</h3>
-                </a>
-                <a href="#" class="product-card" data-parallax-img>
-                    <div class="product-card__image" data-depth="0.3" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&h=400&fit=crop')"></div>
-                    <span class="product-card__category">Памятники</span>
-                    <h3 class="product-card__title">Курган Мицкевича</h3>
-                </a>
-                <a href="#" class="product-card" data-parallax-img>
-                    <div class="product-card__image" data-depth="0.3" style="background-image: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&h=400&fit=crop')"></div>
-                    <span class="product-card__category">Архитектура</span>
-                    <h3 class="product-card__title">Торговые ряды</h3>
-                </a>
-            </div>
+      <div class="container">
+        <h2 class="section-title" data-reveal>Город в кадре</h2>
+        <p class="section-subtitle products__subtitle" data-reveal>
+          Каждая точка на карте здесь — готовый план для сюжета: замок в белой
+          пелене, костёл, который вырастает из тумана, музей поэта и холм, где
+          туман держится дольше всех.
+        </p>
+        <div class="products__grid">
+          <a href="#" class="product-card" data-parallax-img>
+            <div
+              class="product-card__image"
+              data-depth="0.3"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&h=400&fit=crop&quot;);
+              "
+            ></div>
+            <span class="product-card__category">Замки</span>
+            <h3 class="product-card__title">Новогрудский замок</h3>
+          </a>
+          <a href="#" class="product-card" data-parallax-img>
+            <div
+              class="product-card__image"
+              data-depth="0.3"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1548013146-72479768bada?w=600&h=400&fit=crop&quot;);
+              "
+            ></div>
+            <span class="product-card__category">Храмы</span>
+            <h3 class="product-card__title">Фарный костёл</h3>
+          </a>
+          <a href="#" class="product-card" data-parallax-img>
+            <div
+              class="product-card__image"
+              data-depth="0.3"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop&quot;);
+              "
+            ></div>
+            <span class="product-card__category">Музеи</span>
+            <h3 class="product-card__title">Дом Мицкевича</h3>
+          </a>
+          <a href="#" class="product-card" data-parallax-img>
+            <div
+              class="product-card__image"
+              data-depth="0.3"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=400&fit=crop&quot;);
+              "
+            ></div>
+            <span class="product-card__category">Природа</span>
+            <h3 class="product-card__title">Гора Миндовга</h3>
+          </a>
+          <a href="#" class="product-card" data-parallax-img>
+            <div
+              class="product-card__image"
+              data-depth="0.3"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&h=400&fit=crop&quot;);
+              "
+            ></div>
+            <span class="product-card__category">Памятники</span>
+            <h3 class="product-card__title">Курган Мицкевича</h3>
+          </a>
+          <a href="#" class="product-card" data-parallax-img>
+            <div
+              class="product-card__image"
+              data-depth="0.3"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&h=400&fit=crop&quot;);
+              "
+            ></div>
+            <span class="product-card__category">Архитектура</span>
+            <h3 class="product-card__title">Торговые ряды</h3>
+          </a>
         </div>
+      </div>
     </section>
 
     <!-- Why section -->
     <section class="why" id="why" data-scroll-section>
-        <div class="container">
-            <h2 class="section-title" data-reveal>Почему здесь так много тумана?</h2>
-            <p class="section-subtitle why__subtitle" data-reveal>С высоты репортёрского взгляда всё просто: рельеф, вода и ветер делают Новогрудок естественной «чашей» для тумана.</p>
-            <p class="why__text" data-reveal>Холмы собирают влажный воздух, леса вокруг держат прохладу, а холодные ночи и тёплые дни заставляют туман рождаться почти каждый день. Это не туристический трюк, а честная география — и за ней особенно интересно наблюдать вживую.</p>
-            <div class="why__grid">
-                <div class="why__item" data-reveal>
-                    <div class="why__icon">🌫️</div>
-                    <h4>Туманная атмосфера</h4>
-                </div>
-                <div class="why__item" data-reveal>
-                    <div class="why__icon">🌿</div>
-                    <h4>Экологичность</h4>
-                </div>
-                <div class="why__item" data-reveal>
-                    <div class="why__icon">🏰</div>
-                    <h4>Древняя история</h4>
-                </div>
-                <div class="why__item" data-reveal>
-                    <div class="why__icon">📖</div>
-                    <h4>Культура ВКЛ</h4>
-                </div>
-                <div class="why__item" data-reveal>
-                    <div class="why__icon">🚶</div>
-                    <h4>Пешие маршруты</h4>
-                </div>
-                <div class="why__item" data-reveal>
-                    <div class="why__icon">📸</div>
-                    <h4>Фото-локации</h4>
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="section-title" data-reveal>
+          Почему здесь так много тумана?
+        </h2>
+        <p class="section-subtitle why__subtitle" data-reveal>
+          С высоты репортёрского взгляда всё просто: рельеф, вода и ветер делают
+          Новогрудок естественной «чашей» для тумана.
+        </p>
+        <p class="why__text" data-reveal>
+          Холмы собирают влажный воздух, леса вокруг держат прохладу, а холодные
+          ночи и тёплые дни заставляют туман рождаться почти каждый день. Это не
+          туристический трюк, а честная география — и за ней особенно интересно
+          наблюдать вживую.
+        </p>
+        <div class="why__grid">
+          <div class="why__item" data-reveal>
+            <div class="why__icon">🌫️</div>
+            <h4>Туманная атмосфера</h4>
+          </div>
+          <div class="why__item" data-reveal>
+            <div class="why__icon">🌿</div>
+            <h4>Экологичность</h4>
+          </div>
+          <div class="why__item" data-reveal>
+            <div class="why__icon">🏰</div>
+            <h4>Древняя история</h4>
+          </div>
+          <div class="why__item" data-reveal>
+            <div class="why__icon">📖</div>
+            <h4>Культура ВКЛ</h4>
+          </div>
+          <div class="why__item" data-reveal>
+            <div class="why__icon">🚶</div>
+            <h4>Пешие маршруты</h4>
+          </div>
+          <div class="why__item" data-reveal>
+            <div class="why__icon">📸</div>
+            <h4>Фото-локации</h4>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Colours / Fog types -->
     <section class="colours" data-scroll-section>
-        <div class="container">
-            <h2 class="section-title" data-reveal>Оттенки тумана</h2>
-            <p class="section-subtitle" data-reveal>Создано природой. Доступно в диапазоне от утренней дымки до вечерней мглы.</p>
-            <p class="colours__intro" data-reveal>Весь туман Новогрудка доступен в диапазоне оттенков — от светлой Утренней росы до глубокой Ночной мглы.</p>
-            <div class="colours__scroll" data-reveal>
-            <div class="colours__grid">
-                <div class="colour-swatch" style="--swatch: #e8e6e1">Утренняя роса</div>
-                <div class="colour-swatch" style="--swatch: #d4d2cc">Лёгкая дымка</div>
-                <div class="colour-swatch" style="--swatch: #b8b5ad">Серебристый</div>
-                <div class="colour-swatch" style="--swatch: #9a968c">Осенний туман</div>
-                <div class="colour-swatch" style="--swatch: #7d7870">Долинный</div>
-                <div class="colour-swatch" style="--swatch: #5c574f">Вечерняя мгла</div>
-                <div class="colour-swatch" style="--swatch: #3d3a35">Ночная мгла</div>
+      <div class="container">
+        <h2 class="section-title" data-reveal>Оттенки тумана</h2>
+        <p class="section-subtitle" data-reveal>
+          Создано природой. Доступно в диапазоне от утренней дымки до вечерней
+          мглы.
+        </p>
+        <p class="colours__intro" data-reveal>
+          Весь туман Новогрудка доступен в диапазоне оттенков — от светлой
+          Утренней росы до глубокой Ночной мглы.
+        </p>
+        <div class="colours__scroll" data-reveal>
+          <div class="colours__grid">
+            <div class="colour-swatch" style="--swatch: #e8e6e1">
+              Утренняя роса
             </div>
+            <div class="colour-swatch" style="--swatch: #d4d2cc">
+              Лёгкая дымка
             </div>
+            <div class="colour-swatch" style="--swatch: #b8b5ad">
+              Серебристый
+            </div>
+            <div class="colour-swatch" style="--swatch: #9a968c">
+              Осенний туман
+            </div>
+            <div class="colour-swatch" style="--swatch: #7d7870">Долинный</div>
+            <div class="colour-swatch" style="--swatch: #5c574f">
+              Вечерняя мгла
+            </div>
+            <div class="colour-swatch" style="--swatch: #3d3a35">
+              Ночная мгла
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Samples / Gallery -->
     <section class="samples" id="gallery" data-scroll-section>
-        <div class="container">
-            <h2 class="section-title" data-reveal>Кадры из репортажа</h2>
-            <p class="section-subtitle" data-reveal>Несколько фрагментов того, как Новогрудок выглядит, когда город просыпается не от солнца, а от тумана.</p>
-            <div class="samples__grid" data-reveal>
-                <div class="sample-card" style="background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop')"></div>
-                <div class="sample-card" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop')"></div>
-                <div class="sample-card" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop')"></div>
-            </div>
+      <div class="container">
+        <h2 class="section-title" data-reveal>Кадры из репортажа</h2>
+        <p class="section-subtitle" data-reveal>
+          Несколько фрагментов того, как Новогрудок выглядит, когда город
+          просыпается не от солнца, а от тумана.
+        </p>
+        <div class="samples__grid" data-reveal>
+          <div
+            class="sample-card"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop&quot;);
+            "
+          ></div>
+          <div
+            class="sample-card"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop&quot;);
+            "
+          ></div>
+          <div
+            class="sample-card"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop&quot;);
+            "
+          ></div>
         </div>
+      </div>
     </section>
 
     <!-- Custom solutions -->
     <section class="custom" id="visit" data-scroll-section>
-        <div class="container">
-            <h2 class="section-title" data-reveal>Как туман меняет город в течение дня</h2>
-            <p class="section-subtitle custom__subtitle" data-reveal>В репортаже о Новогрудке важны даже не маршруты, а время. Утро, день и вечер — три совершенно разных города.</p>
-            <div class="custom__steps">
-                <div class="custom__step" data-reveal>
-                    <span class="custom__step-num">01 / 03</span>
-                    <h3>Утро</h3>
-                    <p>Туман заполняет низины и дворы, замок и костёл кажутся отдельными островами. В это время город звучит особенно приглушённо — и именно тогда лучше всего слышны шаги и редкие голоса.</p>
-                </div>
-                <div class="custom__step" data-reveal>
-                    <span class="custom__step-num">02 / 03</span>
-                    <h3>День</h3>
-                    <p>Туман отступает к окраинам, остаётся в оврагах и над водой. Город показывает детали: кирпич, штукатурку, следы истории на фасадах, которые ещё час назад были размыты дымкой.</p>
-                </div>
-                <div class="custom__step" data-reveal>
-                    <span class="custom__step-num">03 / 03</span>
-                    <h3>Вечер</h3>
-                    <p>Туман возвращается. Свет в окнах и на улицах режет его мягкими жёлтыми слоями, и город снова становится похож на декорацию к длинному репортажу — где сюжет не заканчивается, даже когда камера выключена.</p>
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="section-title" data-reveal>
+          Как туман меняет город в течение дня
+        </h2>
+        <p class="section-subtitle custom__subtitle" data-reveal>
+          В репортаже о Новогрудке важны даже не маршруты, а время. Утро, день и
+          вечер — три совершенно разных города.
+        </p>
+        <div class="custom__steps">
+          <div class="custom__step" data-reveal>
+            <span class="custom__step-num">01 / 03</span>
+            <h3>Утро</h3>
+            <p>
+              Туман заполняет низины и дворы, замок и костёл кажутся отдельными
+              островами. В это время город звучит особенно приглушённо — и
+              именно тогда лучше всего слышны шаги и редкие голоса.
+            </p>
+          </div>
+          <div class="custom__step" data-reveal>
+            <span class="custom__step-num">02 / 03</span>
+            <h3>День</h3>
+            <p>
+              Туман отступает к окраинам, остаётся в оврагах и над водой. Город
+              показывает детали: кирпич, штукатурку, следы истории на фасадах,
+              которые ещё час назад были размыты дымкой.
+            </p>
+          </div>
+          <div class="custom__step" data-reveal>
+            <span class="custom__step-num">03 / 03</span>
+            <h3>Вечер</h3>
+            <p>
+              Туман возвращается. Свет в окнах и на улицах режет его мягкими
+              жёлтыми слоями, и город снова становится похож на декорацию к
+              длинному репортажу — где сюжет не заканчивается, даже когда камера
+              выключена.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Case studies -->
     <section class="cases" data-scroll-section>
-        <div class="container">
-            <h2 class="section-title" data-reveal>Исследуйте наши маршруты</h2>
-            <a href="#" class="section-link" data-reveal>Смотреть все</a>
-            <p class="cases__intro" data-reveal>Замковые руины на легендарных холмах, храмы в туманной дымке и маршруты по местам Адама Мицкевича. Новогрудок участвовал в создании одних из самых инновационных туристических проектов Беларуси.</p>
-            <div class="cases__grid">
-                <a href="#" class="case-card" data-reveal>
-                    <div class="case-card__image" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&h=400&fit=crop')"></div>
-                    <span class="case-card__tag">История</span>
-                    <h3 class="case-card__title">Новогрудский замок</h3>
-                    <span class="case-card__meta">Руины • XIII век</span>
-                </a>
-                <a href="#" class="case-card" data-reveal>
-                    <div class="case-card__image" style="background-image: url('https://images.unsplash.com/photo-1548013146-72479768bada?w=600&h=400&fit=crop')"></div>
-                    <span class="case-card__tag">Архитектура</span>
-                    <h3 class="case-card__title">Фарный костёл</h3>
-                    <span class="case-card__meta">Барокко • XVIII век</span>
-                </a>
-                <a href="#" class="case-card" data-reveal>
-                    <div class="case-card__image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop')"></div>
-                    <span class="case-card__tag">Культура</span>
-                    <h3 class="case-card__title">Дом-музей Мицкевича</h3>
-                    <span class="case-card__meta">Литература • Поэзия</span>
-                </a>
-                <a href="#" class="case-card" data-reveal>
-                    <div class="case-card__image" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=400&fit=crop')"></div>
-                    <span class="case-card__tag">Природа</span>
-                    <h3 class="case-card__title">Гора Миндовга</h3>
-                    <span class="case-card__meta">Панорама • Легенды</span>
-                </a>
-            </div>
+      <div class="container">
+        <h2 class="section-title" data-reveal>Исследуйте наши маршруты</h2>
+        <a href="#" class="section-link" data-reveal>Смотреть все</a>
+        <p class="cases__intro" data-reveal>
+          Замковые руины на легендарных холмах, храмы в туманной дымке и
+          маршруты по местам Адама Мицкевича. Новогрудок участвовал в создании
+          одних из самых инновационных туристических проектов Беларуси.
+        </p>
+        <div class="cases__grid">
+          <a href="#" class="case-card" data-reveal>
+            <div
+              class="case-card__image"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&h=400&fit=crop&quot;);
+              "
+            ></div>
+            <span class="case-card__tag">История</span>
+            <h3 class="case-card__title">Новогрудский замок</h3>
+            <span class="case-card__meta">Руины • XIII век</span>
+          </a>
+          <a href="#" class="case-card" data-reveal>
+            <div
+              class="case-card__image"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1548013146-72479768bada?w=600&h=400&fit=crop&quot;);
+              "
+            ></div>
+            <span class="case-card__tag">Архитектура</span>
+            <h3 class="case-card__title">Фарный костёл</h3>
+            <span class="case-card__meta">Барокко • XVIII век</span>
+          </a>
+          <a href="#" class="case-card" data-reveal>
+            <div
+              class="case-card__image"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop&quot;);
+              "
+            ></div>
+            <span class="case-card__tag">Культура</span>
+            <h3 class="case-card__title">Дом-музей Мицкевича</h3>
+            <span class="case-card__meta">Литература • Поэзия</span>
+          </a>
+          <a href="#" class="case-card" data-reveal>
+            <div
+              class="case-card__image"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=400&fit=crop&quot;);
+              "
+            ></div>
+            <span class="case-card__tag">Природа</span>
+            <h3 class="case-card__title">Гора Миндовга</h3>
+            <span class="case-card__meta">Панорама • Легенды</span>
+          </a>
         </div>
+      </div>
     </section>
 
     <!-- Insights -->
     <section class="insights" data-scroll-section>
-        <div class="container">
-            <h2 class="section-title" data-reveal>Последние статьи</h2>
-            <a href="#" class="section-link" data-reveal>Читать все</a>
-            <div class="insights__grid">
-                <a href="#" class="insight-card" data-reveal>
-                    <div class="insight-card__image" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=500&h=300&fit=crop')"></div>
-                    <span class="insight-card__meta">Статья • 5 мин</span>
-                    <h3 class="insight-card__title">Ваш гид по Новогрудку</h3>
-                </a>
-                <a href="#" class="insight-card" data-reveal>
-                    <div class="insight-card__image" style="background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=500&h=300&fit=crop')"></div>
-                    <span class="insight-card__meta">Статья • 5 мин</span>
-                    <h3 class="insight-card__title">Туман: почему Новогрудок особенный</h3>
-                </a>
-                <a href="#" class="insight-card" data-reveal>
-                    <div class="insight-card__image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop')"></div>
-                    <span class="insight-card__meta">Статья • 7 мин</span>
-                    <h3 class="insight-card__title">Доступный туризм в малых городах</h3>
-                </a>
-                <a href="#" class="insight-card" data-reveal>
-                    <div class="insight-card__image" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=500&h=300&fit=crop')"></div>
-                    <span class="insight-card__meta">Статья • 6 мин</span>
-                    <h3 class="insight-card__title">История ВКЛ: от Новогрудка до Вильнюса</h3>
-                </a>
-            </div>
+      <div class="container">
+        <h2 class="section-title" data-reveal>Последние статьи</h2>
+        <a href="#" class="section-link" data-reveal>Читать все</a>
+        <div class="insights__grid">
+          <a href="#" class="insight-card" data-reveal>
+            <div
+              class="insight-card__image"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=500&h=300&fit=crop&quot;);
+              "
+            ></div>
+            <span class="insight-card__meta">Статья • 5 мин</span>
+            <h3 class="insight-card__title">Ваш гид по Новогрудку</h3>
+          </a>
+          <a href="#" class="insight-card" data-reveal>
+            <div
+              class="insight-card__image"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=500&h=300&fit=crop&quot;);
+              "
+            ></div>
+            <span class="insight-card__meta">Статья • 5 мин</span>
+            <h3 class="insight-card__title">
+              Туман: почему Новогрудок особенный
+            </h3>
+          </a>
+          <a href="#" class="insight-card" data-reveal>
+            <div
+              class="insight-card__image"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop&quot;);
+              "
+            ></div>
+            <span class="insight-card__meta">Статья • 7 мин</span>
+            <h3 class="insight-card__title">
+              Доступный туризм в малых городах
+            </h3>
+          </a>
+          <a href="#" class="insight-card" data-reveal>
+            <div
+              class="insight-card__image"
+              style="
+                background-image: url(&quot;https://images.unsplash.com/photo-1519681393784-d120267933ba?w=500&h=300&fit=crop&quot;);
+              "
+            ></div>
+            <span class="insight-card__meta">Статья • 6 мин</span>
+            <h3 class="insight-card__title">
+              История ВКЛ: от Новогрудка до Вильнюса
+            </h3>
+          </a>
         </div>
+      </div>
     </section>
 
     <!-- Pixel Game: Пройти через туман -->
     <section class="game-section" id="game" data-scroll-section>
-        <div class="game-section__header">
-            <h2 class="section-title game-section__title" data-reveal>Пройти через туман</h2>
-            <p class="section-subtitle game-section__subtitle" data-reveal>Исследуйте Новогрудок в тумане. Фотографируйте достопримечательности и найдите журналистов СБ.</p>
-        </div>
-        <div class="game-wrapper">
-            <div class="game-container">
-                <canvas id="gameCanvas" class="game-canvas"></canvas>
-                <div class="game-ui">
-                    <div class="game-score">Очки: <span id="gameScore">0</span></div>
-                    <div class="game-photos">Фото: <span id="gamePhotos">0</span>/5</div>
-                    <div class="game-hint" id="gameHint"></div>
-                </div>
-                <div class="game-controls">
-                    <button class="game-btn game-btn--start" id="gameStart">Начать игру</button>
-                    <div class="game-controls__keys" id="gameControlsKeys">
-                        <div class="game-controls__dpad">
-                            <div class="game-dpad">
-                                <button class="game-key game-key--up" data-dir="up" aria-label="Вверх">↑</button>
-                                <button class="game-key game-key--down" data-dir="down" aria-label="Вниз">↓</button>
-                                <button class="game-key game-key--left" data-dir="left" aria-label="Влево">←</button>
-                                <button class="game-key game-key--right" data-dir="right" aria-label="Вправо">→</button>
-                            </div>
-                        </div>
-                        <div class="game-controls__actions">
-                            <button class="game-key game-key--photo" id="gamePhoto" aria-label="Сфотографировать">📷</button>
-                            <button class="game-btn game-btn--fullscreen-toggle" id="gameFullscreenToggle" aria-label="Полноэкранный режим">⤢</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="game-btn game-btn--exit" id="gameExitFullscreen" aria-label="Выйти">✕</button>
+      <div class="game-section__header">
+        <h2 class="section-title game-section__title" data-reveal>
+          Пройти через туман
+        </h2>
+        <p class="section-subtitle game-section__subtitle" data-reveal>
+          Исследуйте Новогрудок в тумане. Фотографируйте достопримечательности и
+          найдите журналистов СБ.
+        </p>
+      </div>
+      <div class="game-wrapper">
+        <div class="game-container">
+          <canvas id="gameCanvas" class="game-canvas"></canvas>
+          <div class="game-ui">
+            <div class="game-score">Очки: <span id="gameScore">0</span></div>
+            <div class="game-photos">
+              Фото: <span id="gamePhotos">0</span>/5
             </div>
-        </div>
-        <!-- Polaroid Photo Modal -->
-        <div class="game-modal" id="gamePhotoModal" aria-hidden="true">
-            <div class="game-modal__backdrop"></div>
-            <div class="game-modal__content game-polaroid">
-                <div class="game-polaroid__frame">
-                    <img class="game-polaroid__img" id="gamePhotoImg" src="" alt="Фото достопримечательности">
-                    <div class="game-polaroid__caption" id="gamePhotoCaption">Новогрудский замок</div>
+            <div class="game-hint" id="gameHint"></div>
+          </div>
+          <div class="game-controls">
+            <button class="game-btn game-btn--start" id="gameStart">
+              Начать игру
+            </button>
+            <div class="game-controls__keys" id="gameControlsKeys">
+              <div class="game-controls__dpad">
+                <div class="game-dpad">
+                  <button
+                    class="game-key game-key--up"
+                    data-dir="up"
+                    aria-label="Вверх"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    class="game-key game-key--down"
+                    data-dir="down"
+                    aria-label="Вниз"
+                  >
+                    ↓
+                  </button>
+                  <button
+                    class="game-key game-key--left"
+                    data-dir="left"
+                    aria-label="Влево"
+                  >
+                    ←
+                  </button>
+                  <button
+                    class="game-key game-key--right"
+                    data-dir="right"
+                    aria-label="Вправо"
+                  >
+                    →
+                  </button>
                 </div>
-                <button class="game-modal__close" id="gameModalClose" aria-label="Закрыть">×</button>
+              </div>
+              <div class="game-controls__actions">
+                <button
+                  class="game-key game-key--photo"
+                  id="gamePhoto"
+                  aria-label="Сфотографировать"
+                >
+                  📷
+                </button>
+                <button
+                  class="game-btn game-btn--fullscreen-toggle"
+                  id="gameFullscreenToggle"
+                  aria-label="Полноэкранный режим"
+                >
+                  ⤢
+                </button>
+              </div>
             </div>
+          </div>
+          <button
+            class="game-btn game-btn--exit"
+            id="gameExitFullscreen"
+            aria-label="Выйти"
+          >
+            ✕
+          </button>
         </div>
-        <!-- Win Modal -->
-        <div class="game-modal" id="gameWinModal" aria-hidden="true">
-            <div class="game-modal__backdrop"></div>
-            <div class="game-modal__content game-win">
-                <h3 class="game-win__title">Интервью передано!</h3>
-                <p class="game-win__text">Вы нашли журналистов СБ и передали им фотографии. Миссия выполнена!</p>
-                <p class="game-win__score">Итоговые очки: <span id="gameWinScore">0</span></p>
-                <button class="btn btn--primary" id="gameRestart">Играть снова</button>
+      </div>
+      <!-- Polaroid Photo Modal -->
+      <div class="game-modal" id="gamePhotoModal" aria-hidden="true">
+        <div class="game-modal__backdrop"></div>
+        <div class="game-modal__content game-polaroid">
+          <div class="game-polaroid__frame">
+            <img
+              class="game-polaroid__img"
+              id="gamePhotoImg"
+              src=""
+              alt="Фото достопримечательности"
+            />
+            <div class="game-polaroid__caption" id="gamePhotoCaption">
+              Новогрудский замок
             </div>
+          </div>
+          <button
+            class="game-modal__close"
+            id="gameModalClose"
+            aria-label="Закрыть"
+          >
+            ×
+          </button>
         </div>
+      </div>
+      <!-- Win Modal -->
+      <div class="game-modal" id="gameWinModal" aria-hidden="true">
+        <div class="game-modal__backdrop"></div>
+        <div class="game-modal__content game-win">
+          <h3 class="game-win__title">Интервью передано!</h3>
+          <p class="game-win__text">
+            Вы нашли журналистов СБ и передали им фотографии. Миссия выполнена!
+          </p>
+          <p class="game-win__score">
+            Итоговые очки: <span id="gameWinScore">0</span>
+          </p>
+          <button class="btn btn--primary" id="gameRestart">
+            Играть снова
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer" id="contact">
-        <div class="container">
-            <div class="footer__top">
-                <p class="footer__mission">Этот сайт — часть серии «живых» репортажей о белорусских городах. Новогрудок — одна из точек, где туман помогает лучше понять пространство, людей и время.</p>
-            </div>
-            <div class="footer-projects">
-                <h4 class="footer-projects__title">Другие города и проекты</h4>
-                <div class="footer-projects__carousel">
-                    <button class="footer-projects__arrow footer-projects__arrow--prev" aria-label="Предыдущий проект">←</button>
-                    <div class="footer-projects__viewport">
-                        <div class="footer-projects__track">
-                            <article class="footer-projects__item">
-                                <h5>Несвиж • Город отражений</h5>
-                                <p>Где вода и камень зеркально дублируют друг друга, а история читается в отражении ратуши и замка.</p>
-                            </article>
-                            <article class="footer-projects__item">
-                                <h5>Новогрудок • Город тумана</h5>
-                                <p>Холмы, руины и улицы, которые каждый день рисуются заново в плотной белой дымке.</p>
-                            </article>
-                            <article class="footer-projects__item">
-                                <h5>Неизвестные малые города</h5>
-                                <p>Серия полевых заметок о местах, которые обычно проходят мимо туристических буклетов.</p>
-                            </article>
-                        </div>
-                    </div>
-                    <button class="footer-projects__arrow footer-projects__arrow--next" aria-label="Следующий проект">→</button>
-                </div>
-                <a class="footer-projects__link" href="https://www.sb.by/articles/themes/spetsproekt-sb-nash-zhivoy-reportazh/" target="_blank" rel="noopener noreferrer">
-                    Смотреть все материалы
-                </a>
-            </div>
-            <div class="footer__bottom">
-                <span class="footer__logo">Новогрудок</span>
-                <span class="footer__copy">© 2025 • Гродненская область, Беларусь</span>
-            </div>
+      <div class="container">
+        <div class="footer__top">
+          <p class="footer__mission">
+            Этот сайт — часть серии «живых» репортажей о белорусских городах.
+            Новогрудок — одна из точек, где туман помогает лучше понять
+            пространство, людей и время.
+          </p>
         </div>
+        <div class="footer-projects">
+          <h4 class="footer-projects__title">Живой репортаж — материалы</h4>
+          <div class="footer-projects__carousel">
+            <button
+              class="footer-projects__arrow footer-projects__arrow--prev"
+              aria-label="Предыдущий проект"
+            >
+              ←
+            </button>
+            <div class="footer-projects__viewport">
+              <div class="footer-projects__track">
+                <article class="footer-projects__item">
+                  <h5>Несвиж • Город отражений</h5>
+                  <p>
+                    Где вода и камень зеркально дублируют друг друга, а история
+                    читается в отражении ратуши и замка.
+                  </p>
+                </article>
+                <article class="footer-projects__item">
+                  <h5>Новогрудок • Город тумана</h5>
+                  <p>
+                    Холмы, руины и улицы, которые каждый день рисуются заново в
+                    плотной белой дымке.
+                  </p>
+                </article>
+                <article class="footer-projects__item">
+                  <h5>Неизвестные малые города</h5>
+                  <p>
+                    Серия полевых заметок о местах, которые обычно проходят мимо
+                    туристических буклетов.
+                  </p>
+                </article>
+              </div>
+            </div>
+            <button
+              class="footer-projects__arrow footer-projects__arrow--next"
+              aria-label="Следующий проект"
+            >
+              →
+            </button>
+          </div>
+          <a
+            class="footer-projects__link"
+            href="https://www.sb.by/articles/themes/spetsproekt-sb-nash-zhivoy-reportazh/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Смотреть все материалы
+          </a>
+        </div>
+        <div class="footer__bottom">
+          <span class="footer__logo">Новогрудок</span>
+          <span class="footer__copy"
+            >© 2025 • Гродненская область, Беларусь</span
+          >
+        </div>
+      </div>
     </footer>
 
     <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -406,5 +757,5 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="script.js"></script>
     <script src="game.js"></script>
-</body>
+  </body>
 </html>
