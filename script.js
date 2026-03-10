@@ -1,0 +1,399 @@
+/**
+ * Novogrudok Landing Page - Jonite-style clone
+ * Lenis + GSAP ScrollTrigger + Hero load timeline
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    initGSAP(); // Must run first to register ScrollTrigger
+    initLenis();
+    initHeroSlides();
+    initHeroBoxSlides();
+    initTimeDisplay();
+    initHeader();
+    initMobileMenu();
+    initFooterProjectsCarousel();
+});
+
+window.addEventListener('load', () => {
+    initHeroLoadAnimation(); // Run after load, like Jonite
+});
+
+/**
+ * Lenis Smooth Scroll + GSAP integration
+ */
+function initLenis() {
+    if (typeof Lenis === 'undefined') {
+        initSmoothScrollFallback();
+        return;
+    }
+
+    window.lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+        smoothTouch: false,
+        touchMultiplier: 2
+    });
+
+    document.documentElement.classList.add('lenis');
+
+    const lenis = window.lenis;
+    if (typeof ScrollTrigger !== 'undefined') {
+        lenis.on('scroll', ScrollTrigger.update);
+    }
+
+    if (typeof gsap !== 'undefined') {
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+        setTimeout(() => ScrollTrigger?.refresh(), 100);
+    } else {
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                lenis.scrollTo(target, { offset: 0 });
+            }
+        });
+    });
+}
+
+function initSmoothScrollFallback() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+}
+
+/**
+ * GSAP ScrollTrigger - Reveal animations, Parallax, 3D effects
+ */
+function initGSAP() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Reveal animations
+    gsap.utils.toArray('[data-reveal]').forEach((el, i) => {
+        gsap.fromTo(el, 
+            { opacity: 0, y: 60 },
+            { 
+                opacity: 1, 
+                y: 0, 
+                duration: 0.8, 
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    end: 'bottom 15%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+    });
+
+    // Hero - scroll parallax on bg
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        const heroBg = hero.querySelector('.hero__bg');
+        if (heroBg) {
+            gsap.to(heroBg, {
+                yPercent: 20,
+                scale: 1.1,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: hero,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1.5
+                }
+            });
+        }
+    }
+
+    // Product card images - parallax on scroll
+    gsap.utils.toArray('[data-parallax-img]').forEach(card => {
+        const img = card.querySelector('[data-depth]');
+        if (!img) return;
+        const depth = parseFloat(img.dataset.depth) || 0.3;
+
+        gsap.to(img, {
+            yPercent: 30 * depth,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: card,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+            }
+        });
+    });
+
+    // Case cards - 3D tilt on scroll
+    gsap.utils.toArray('.case-card').forEach((card, i) => {
+        const img = card.querySelector('.case-card__image');
+        if (!img) return;
+
+        gsap.fromTo(img, 
+            { scale: 1.1 },
+            { 
+                scale: 1,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 90%',
+                    end: 'bottom 10%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    // Sample cards - scale parallax
+    gsap.utils.toArray('.sample-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { scale: 1.15 },
+            {
+                scale: 1,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 90%',
+                    end: 'bottom 10%',
+                    scrub: 1
+                }
+            }
+        );
+    });
+}
+
+/**
+ * Hero load animation - Jonite-style clip-path reveal + h1 slide
+ */
+function initHeroLoadAnimation() {
+    if (typeof gsap === 'undefined') return;
+
+    const hero = document.querySelector('[data-hero]');
+    if (!hero) return;
+
+    const h1 = hero.querySelector('[data-hero-h1]');
+    const leftBox = hero.querySelector('[data-hero-leftbox]');
+    const rightBox = hero.querySelector('[data-hero-rightbox]');
+
+    if (!h1 || !leftBox || !rightBox) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+        h1.style.transform = 'translateY(0)';
+        leftBox.style.setProperty('--height', '100%');
+        rightBox.style.setProperty('--height', '100%');
+        return;
+    }
+
+    h1.style.transform = 'translateY(100%)';
+
+    const timeline = gsap.timeline({
+        defaults: { ease: 'power3.out' },
+        onStart: () => {
+            try { window.lenis?.stop(); } catch (_) {}
+        },
+        onComplete: () => {
+            try { window.lenis?.start(); } catch (_) {}
+        }
+    });
+
+    const isDesktop = window.matchMedia('(min-width: 992px)').matches;
+    const leftBoxHeight = leftBox.getBoundingClientRect().height;
+    const rightBoxHeight = rightBox.getBoundingClientRect().height;
+
+    timeline.addLabel('step1', 0.5);
+    timeline.to(leftBox, { '--height': '198px', duration: 0.7 }, 'step1');
+    timeline.to(rightBox, { '--height': '198px', duration: 0.7 }, 'step1');
+    timeline.addLabel('step2', '+=0.2');
+    timeline.to(leftBox, { '--height': leftBoxHeight + 'px', duration: 1.2 }, 'step2');
+    timeline.to(rightBox, { '--height': rightBoxHeight + 'px', duration: 1.2 }, 'step2');
+    timeline.to(h1, { y: 0, duration: 1.2 }, 'step2');
+}
+
+/**
+ * Hero background slideshow
+ */
+function initHeroSlides() {
+    const slides = document.querySelectorAll('.hero__bg .hero__slide');
+    if (slides.length < 2) return;
+
+    let current = 0;
+    const duration = 6000;
+
+    function nextSlide() {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }
+
+    setInterval(nextSlide, duration);
+}
+
+/**
+ * Hero right box slideshow
+ */
+function initHeroBoxSlides() {
+    const container = document.querySelector('.hero__box-slides');
+    if (!container) return;
+
+    const slides = container.querySelectorAll('.hero__box-slide');
+    if (slides.length < 2) return;
+
+    let current = 0;
+    const duration = 8000;
+
+    function nextSlide() {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }
+
+    setInterval(nextSlide, duration);
+}
+
+/**
+ * Live time display - Novogrudok & Grodno (like Jonite US/Singapore)
+ */
+function initTimeDisplay() {
+    const timeEl = document.getElementById('heroTime');
+    const timeEl2 = document.getElementById('heroTime2');
+    if (!timeEl) return;
+
+    const formatter1 = new Intl.DateTimeFormat('ru-BY', {
+        timeZone: 'Europe/Minsk',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+
+    const formatter2 = new Intl.DateTimeFormat('ru-BY', {
+        timeZone: 'Europe/Minsk',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+
+    function updateTime() {
+        const now = new Date();
+        const p1 = formatter1.formatToParts(now);
+        const hour = p1.find(x => x.type === 'hour')?.value || '00';
+        const minute = p1.find(x => x.type === 'minute')?.value || '00';
+        const second = p1.find(x => x.type === 'second')?.value || '00';
+        const str = `${hour} : ${minute} : ${second}`;
+        timeEl.textContent = str;
+        if (timeEl2) timeEl2.textContent = str;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+}
+
+/**
+ * Header scroll effect
+ */
+function initHeader() {
+    const header = document.querySelector('.header');
+    if (!header) return;
+
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+}
+
+/**
+ * Mobile menu
+ */
+function initMobileMenu() {
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav');
+    const closeBtn = document.querySelector('.nav__close');
+    if (!burger || !nav) return;
+
+    burger.addEventListener('click', () => {
+        burger.classList.toggle('active');
+        nav.classList.toggle('open');
+        document.body.classList.toggle('menu-open');
+        document.documentElement.classList.toggle('menu-open');
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            burger.classList.remove('active');
+            nav.classList.remove('open');
+            document.body.classList.remove('menu-open');
+            document.documentElement.classList.remove('menu-open');
+        });
+    }
+
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            burger.classList.remove('active');
+            nav.classList.remove('open');
+            document.body.classList.remove('menu-open');
+            document.documentElement.classList.remove('menu-open');
+        });
+    });
+}
+
+/**
+ * Footer projects carousel
+ */
+function initFooterProjectsCarousel() {
+    const track = document.querySelector('.footer-projects__track');
+    const prev = document.querySelector('.footer-projects__arrow--prev');
+    const next = document.querySelector('.footer-projects__arrow--next');
+    if (!track || !prev || !next) return;
+
+    const items = Array.from(track.children);
+    let index = 0;
+
+    const update = () => {
+        const itemWidth = items[0].getBoundingClientRect().width + 16;
+        track.style.transform = `translateX(${-index * itemWidth}px)`;
+    };
+
+    prev.addEventListener('click', () => {
+        index = (index - 1 + items.length) % items.length;
+        update();
+    });
+
+    next.addEventListener('click', () => {
+        index = (index + 1) % items.length;
+        update();
+    });
+
+    window.addEventListener('resize', update);
+    update();
+}
