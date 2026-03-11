@@ -158,7 +158,7 @@
 
         // Load external sprites from /sprites folder (relative to index.html)
         loadSprite('hero', SPRITE_PATH + 'hero.png');
-        loadSprite('journalists', SPRITE_PATH + 'journalists.png');
+        loadSprite('journalists', SPRITE_PATH + 'Journalists.png');
         loadSprite('pit', SPRITE_PATH + 'pit.png');
         loadSprite('gard', SPRITE_PATH + 'gard.png');
         loadSprite('ground1', SPRITE_PATH + 'ground1.png');
