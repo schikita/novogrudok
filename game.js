@@ -361,7 +361,8 @@
         camera.y = player.y * TILE - VIEW_H / 2;
         buildWorld();
         initRevealed();
-        document.getElementById('gameStart').style.display = 'none';
+        const container = document.querySelector('.game-container');
+        if (container) container.classList.add('game-started');
         const controlsEl = document.getElementById('gameControlsKeys');
         if (controlsEl && isMobile()) {
             controlsEl.classList.add('game-controls__keys--visible');
@@ -419,8 +420,10 @@
                 } else if (world[ty] && world[ty][tx] === 3) {
                     gameOver = true;
                     setHint('Вы попали в яму! Нажмите «Начать игру» снова.');
-                    document.getElementById('gameStart').style.display = 'block';
-                    document.getElementById('gameStart').textContent = 'Начать заново';
+                    const container = document.querySelector('.game-container');
+                    if (container) container.classList.remove('game-started');
+                    const startBtn = document.getElementById('gameStart');
+                    if (startBtn) startBtn.textContent = 'Начать заново';
                     return;
                 }
             }

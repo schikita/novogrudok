@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeader();
     initMobileMenu();
     initFooterProjectsCarousel();
+    initPhotoModal();
 });
 
 window.addEventListener('load', () => {
@@ -116,24 +117,7 @@ function initGSAP() {
         );
     });
 
-    // Hero - scroll parallax on bg
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        const heroBg = hero.querySelector('.hero__bg');
-        if (heroBg) {
-            gsap.to(heroBg, {
-                yPercent: 20,
-                scale: 1.1,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: hero,
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 1.5
-                }
-            });
-        }
-    }
+    // Hero background — статичное фото без анимации
 
     // Product card images - parallax on scroll
     gsap.utils.toArray('[data-parallax-img]').forEach(card => {
@@ -504,5 +488,46 @@ function initFooterProjectsCarousel() {
 
     next.addEventListener('click', () => {
         stepBy(-itemWidth);
+    });
+}
+
+/**
+ * Модальное окно просмотра фото (галерея лесенкой)
+ */
+function initPhotoModal() {
+    const modal = document.getElementById('photoModal');
+    const modalImg = document.getElementById('photoModalImg');
+    const closeBtn = document.getElementById('photoModalClose');
+    const backdrop = document.getElementById('photoModalBackdrop');
+    const photos = document.querySelectorAll('.gallery-ladder__img');
+
+    if (!modal || !modalImg || !photos.length) return;
+
+    function openModal(src, alt) {
+        modalImg.src = src;
+        modalImg.alt = alt || '';
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    photos.forEach((img) => {
+        img.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(img.src, img.alt);
+        });
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (backdrop) backdrop.addEventListener('click', closeModal);
+
+    modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+            closeModal();
+        }
     });
 }
