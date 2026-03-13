@@ -42,6 +42,7 @@
     // Sprite storage
     const SPRITES = {};
     const SPRITE_PATH = 'sprites/';
+    let spritesLoaded = false;
 
     // Фото/спрайты достопримечательностей Новогрудка
     const LANDMARKS = [
@@ -147,15 +148,8 @@
         return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     }
 
-    function init() {
-        canvas = document.getElementById('gameCanvas');
-        if (!canvas) return;
-
-        ctx = canvas.getContext('2d');
-        // Гладкие пиксели нам не нужны — отключаем сглаживание,
-        // чтобы избежать белой сетки между тайлами
-        ctx.imageSmoothingEnabled = false;
-
+    function ensureSpritesLoaded() {
+        if (spritesLoaded) return;
         // Load external sprites from /sprites folder (relative to index.html)
         loadSprite('hero', SPRITE_PATH + 'hero.png');
         loadSprite('journalists', SPRITE_PATH + 'Journalists.png');
@@ -170,6 +164,18 @@
         loadSprite('zamok-3', SPRITE_PATH + 'zamok-kastle.png');
         loadSprite('zamok-4', SPRITE_PATH + 'zamok-house.png');
         loadSprite('zamok-5', SPRITE_PATH + 'zamok-mindowg.png');
+        spritesLoaded = true;
+    }
+
+    function init() {
+        canvas = document.getElementById('gameCanvas');
+        if (!canvas) return;
+
+        ctx = canvas.getContext('2d');
+        // Гладкие пиксели нам не нужны — отключаем сглаживание,
+        // чтобы избежать белой сетки между тайлами
+        ctx.imageSmoothingEnabled = false;
+
         resizeCanvas();
         buildWorld();
         buildFogNoise();
@@ -344,6 +350,8 @@
     }
 
     function startGame() {
+        // Загружаем игровые спрайты только при первом запуске игры
+        ensureSpritesLoaded();
         gameStarted = true;
         gameOver = false;
         gameWon = false;

@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroSlides();
     initHeroBoxSlides();
     initTouristsVideo();
+    initLazyBackgrounds();
     initLazyImages();
     initTimeDisplay();
     initHeader();
@@ -304,6 +305,10 @@ function initTouristsVideo() {
                         video.src = src;
                         hasLoaded = true;
                     }
+                    const poster = video.getAttribute('data-poster');
+                    if (poster) {
+                        video.poster = poster;
+                    }
                 }
                 video.muted = true;
                 video.play().catch(() => {});
@@ -448,12 +453,46 @@ function initHeader() {
 }
 
 /**
+ * Lazy-load section backgrounds via data-bg
+ */
+function initLazyBackgrounds() {
+    if (!('IntersectionObserver' in window)) return;
+
+    const lazyBgs = Array.from(document.querySelectorAll('[data-bg]'));
+    if (!lazyBgs.length) return;
+
+    const bgObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const el = entry.target;
+            const bg = el.getAttribute('data-bg');
+            if (!bg) {
+                bgObserver.unobserve(el);
+                return;
+            }
+
+            el.style.backgroundImage = `url("${bg}")`;
+            el.removeAttribute('data-bg');
+            bgObserver.unobserve(el);
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    lazyBgs.forEach((el) => bgObserver.observe(el));
+}
+
+/**
  * Lazy-load images with loading=\"lazy\" only when section is in view
  */
 function initLazyImages() {
     if (!('IntersectionObserver' in window)) return;
 
-    const lazyImages = Array.from(document.querySelectorAll('img[loading=\"lazy\"]'));
+    // Ожидаем, что ленивые картинки имеют и loading=\"lazy\", и data-lazy-src
+    const lazyImages = Array.from(
+        document.querySelectorAll('img[loading=\"lazy\"][data-lazy-src]')
+    );
     if (!lazyImages.length) return;
 
     const bySection = new Map();
@@ -461,16 +500,6 @@ function initLazyImages() {
         const section = img.closest('section') || document.body;
         if (!bySection.has(section)) bySection.set(section, []);
         bySection.get(section).push(img);
-    });
-
-    // Move src -> data-lazy-src so browser не грузит заранее
-    bySection.forEach(imgs => {
-        imgs.forEach(img => {
-            const src = img.getAttribute('src');
-            if (!src) return;
-            img.setAttribute('data-lazy-src', src);
-            img.removeAttribute('src');
-        });
     });
 
     const sectionObserver = new IntersectionObserver(entries => {

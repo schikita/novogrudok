@@ -768,7 +768,6 @@ body.menu-open {
 .gallery-ladder__bg.bg-galery {
   position: absolute;
   inset: 0;
-  background-image: url("img/galery-1/bg_galery.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1895,7 +1894,7 @@ body.menu-open {
 .game-start-screen__bg {
   position: absolute;
   inset: 0;
-  background-image: var(--game-start-bg, url("img/game-start-bg.jpg"));
+  background-image: var(--game-start-bg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -2343,7 +2342,6 @@ body.menu-open {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("img/last-bg.jpg");
 }
 
 .projects-section__overlay {
