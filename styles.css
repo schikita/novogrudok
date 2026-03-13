@@ -1509,27 +1509,14 @@ body.menu-open {
 
 .products__row {
   display: grid;
-  grid-template-columns: 1fr minmax(280px, 380px);
-  gap: 3rem;
-  align-items: center;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
 }
 
 .products__content {
   min-width: 0;
-}
-
-.products__photo-wrap {
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-}
-
-.products__photo {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+  max-width: 720px;
 }
 
 .products__intro {
@@ -1658,7 +1645,7 @@ body.menu-open {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   padding: 3rem 0;
 }
 
