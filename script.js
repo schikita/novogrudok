@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroSlides();
     initHeroBoxSlides();
     initTouristsVideo();
-    initFactsVideo();
+    initLazyImages();
     initTimeDisplay();
     initHeader();
     initBackToTop();
@@ -389,105 +389,6 @@ function initTouristsVideo() {
  * - lazy load on view
  * - opens shared modal with sound + controls
  */
-function initFactsVideo() {
-    const section = document.getElementById('facts');
-    if (!section || !('IntersectionObserver' in window)) return;
-
-    const video = section.querySelector('.facts__video');
-    const playBtn = section.querySelector('.facts__play');
-    const shell = section.querySelector('.facts__video-shell');
-
-    const modal = document.getElementById('touristsVideoModal');
-    const modalVideo = document.getElementById('touristsVideoModalPlayer');
-    if (!video) return;
-
-    let hasLoaded = false;
-    let inView = false;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.target !== section) return;
-
-            inView = entry.isIntersecting;
-
-            if (entry.isIntersecting) {
-                if (!hasLoaded) {
-                    const src = video.getAttribute('data-src');
-                    if (src) {
-                        video.src = src;
-                        hasLoaded = true;
-                    }
-                }
-            } else {
-                video.pause();
-            }
-        });
-    }, {
-        threshold: 0.35
-    });
-
-    observer.observe(section);
-
-    function openFactsModal() {
-        if (!modal || !modalVideo) return;
-
-        if (!hasLoaded) {
-            const src = video.getAttribute('data-src');
-            if (src) {
-                video.src = src;
-                hasLoaded = true;
-            }
-        }
-
-        const src = video.currentSrc || video.getAttribute('data-src');
-        if (!src) return;
-
-        modalVideo.src = src;
-        modalVideo.currentTime = video.currentTime || 0;
-        modalVideo.muted = false;
-
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-
-        video.pause();
-
-        modalVideo.play().catch(() => {});
-
-        if (playBtn) playBtn.classList.add('is-playing');
-    }
-
-    function handleCloseFromOutside() {
-        if (!modal || !modalVideo) return;
-        if (modal.getAttribute('aria-hidden') === 'true') {
-            if (playBtn) playBtn.classList.remove('is-playing');
-            if (inView) {
-                video.muted = true;
-                video.play().catch(() => {});
-            }
-        }
-    }
-
-    if (playBtn) {
-        playBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openFactsModal();
-        });
-    }
-
-    if (shell) {
-        shell.addEventListener('click', (e) => {
-            if (e.target.closest('.facts__play')) return;
-            openFactsModal();
-        });
-    }
-
-    // Отслеживаем закрытие модалки, чтобы вернуть превью
-    const observerModal = new MutationObserver(handleCloseFromOutside);
-    if (modal) {
-        observerModal.observe(modal, { attributes: true, attributeFilter: ['aria-hidden'] });
-    }
-}
-
 /**
  * Live time display - Novogrudok & Grodno (like Jonite US/Singapore)
  */
@@ -544,6 +445,58 @@ function initHeader() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
+}
+
+/**
+ * Lazy-load images with loading=\"lazy\" only when section is in view
+ */
+function initLazyImages() {
+    if (!('IntersectionObserver' in window)) return;
+
+    const lazyImages = Array.from(document.querySelectorAll('img[loading=\"lazy\"]'));
+    if (!lazyImages.length) return;
+
+    const bySection = new Map();
+    lazyImages.forEach(img => {
+        const section = img.closest('section') || document.body;
+        if (!bySection.has(section)) bySection.set(section, []);
+        bySection.get(section).push(img);
+    });
+
+    // Move src -> data-lazy-src so browser не грузит заранее
+    bySection.forEach(imgs => {
+        imgs.forEach(img => {
+            const src = img.getAttribute('src');
+            if (!src) return;
+            img.setAttribute('data-lazy-src', src);
+            img.removeAttribute('src');
+        });
+    });
+
+    const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const section = entry.target;
+            const imgs = bySection.get(section);
+            if (!imgs || !imgs.length) return;
+
+            imgs.forEach(img => {
+                const src = img.getAttribute('data-lazy-src');
+                if (!src) return;
+                img.setAttribute('src', src);
+                img.removeAttribute('data-lazy-src');
+            });
+
+            bySection.delete(section);
+            sectionObserver.unobserve(section);
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    bySection.forEach((_imgs, section) => {
+        sectionObserver.observe(section);
+    });
 }
 
 /**
