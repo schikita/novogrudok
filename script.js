@@ -8,8 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initLenis();
     initHeroSlides();
     initHeroBoxSlides();
+    initTouristsVideo();
+    initFactsVideo();
     initTimeDisplay();
     initHeader();
+    initBackToTop();
     initMobileMenu();
     initFooterProjectsCarousel();
     initPhotoModal();
@@ -265,6 +268,227 @@ function initHeroBoxSlides() {
 }
 
 /**
+ * Tourists section video:
+ * - vertical preview (muted)
+ * - lazy load on view
+ * - modal with sound + controls
+ */
+function initTouristsVideo() {
+    const section = document.getElementById('tourists');
+    if (!section || !('IntersectionObserver' in window)) return;
+
+    const video = section.querySelector('.tourists__video');
+    const playBtn = section.querySelector('.tourists__play');
+    const shell = section.querySelector('.tourists__video-shell');
+
+    const modal = document.getElementById('touristsVideoModal');
+    const modalVideo = document.getElementById('touristsVideoModalPlayer');
+    const modalClose = document.getElementById('touristsVideoClose');
+    const modalBackdrop = document.getElementById('touristsVideoBackdrop');
+
+    if (!video) return;
+
+    let hasLoaded = false;
+    let inView = false;
+
+    // IntersectionObserver для прелоада и автопаузы превью
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.target !== section) return;
+            inView = entry.isIntersecting;
+
+            if (entry.isIntersecting) {
+                if (!hasLoaded) {
+                    const src = video.getAttribute('data-src');
+                    if (src) {
+                        video.src = src;
+                        hasLoaded = true;
+                    }
+                }
+                video.muted = true;
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+
+    observer.observe(section);
+
+    function openVideoModal() {
+        if (!modal || !modalVideo) return;
+
+        // Убедиться, что src загружен
+        if (!hasLoaded) {
+            const src = video.getAttribute('data-src');
+            if (src) {
+                video.src = src;
+                hasLoaded = true;
+            }
+        }
+
+        const src = video.currentSrc || video.getAttribute('data-src');
+        if (!src) return;
+
+        modalVideo.src = src;
+        modalVideo.currentTime = video.currentTime || 0;
+        modalVideo.muted = false;
+
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        video.pause();
+
+        modalVideo.play().catch(() => {});
+    }
+
+    function closeVideoModal() {
+        if (!modal || !modalVideo) return;
+
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        modalVideo.pause();
+
+        // Возвращаемся к превью (без звука), только если секция видна
+        if (inView) {
+            video.muted = true;
+            video.play().catch(() => {});
+        }
+    }
+
+    if (playBtn) {
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openVideoModal();
+        });
+    }
+
+    if (shell) {
+        shell.addEventListener('click', (e) => {
+            // клики по кнопке уже обработаны выше
+            if (e.target.closest('.tourists__play')) return;
+            openVideoModal();
+        });
+    }
+
+    if (modalClose) modalClose.addEventListener('click', closeVideoModal);
+    if (modalBackdrop) modalBackdrop.addEventListener('click', closeVideoModal);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && modal.getAttribute('aria-hidden') === 'false') {
+            closeVideoModal();
+        }
+    });
+}
+
+/**
+ * Facts section video:
+ * - vertical preview (muted)
+ * - lazy load on view
+ * - opens shared modal with sound + controls
+ */
+function initFactsVideo() {
+    const section = document.getElementById('facts');
+    if (!section || !('IntersectionObserver' in window)) return;
+
+    const video = section.querySelector('.facts__video');
+    const playBtn = section.querySelector('.facts__play');
+    const shell = section.querySelector('.facts__video-shell');
+
+    const modal = document.getElementById('touristsVideoModal');
+    const modalVideo = document.getElementById('touristsVideoModalPlayer');
+    if (!video) return;
+
+    let hasLoaded = false;
+    let inView = false;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.target !== section) return;
+
+            inView = entry.isIntersecting;
+
+            if (entry.isIntersecting) {
+                if (!hasLoaded) {
+                    const src = video.getAttribute('data-src');
+                    if (src) {
+                        video.src = src;
+                        hasLoaded = true;
+                    }
+                }
+            } else {
+                video.pause();
+            }
+        });
+    }, {
+        threshold: 0.35
+    });
+
+    observer.observe(section);
+
+    function openFactsModal() {
+        if (!modal || !modalVideo) return;
+
+        if (!hasLoaded) {
+            const src = video.getAttribute('data-src');
+            if (src) {
+                video.src = src;
+                hasLoaded = true;
+            }
+        }
+
+        const src = video.currentSrc || video.getAttribute('data-src');
+        if (!src) return;
+
+        modalVideo.src = src;
+        modalVideo.currentTime = video.currentTime || 0;
+        modalVideo.muted = false;
+
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        video.pause();
+
+        modalVideo.play().catch(() => {});
+
+        if (playBtn) playBtn.classList.add('is-playing');
+    }
+
+    function handleCloseFromOutside() {
+        if (!modal || !modalVideo) return;
+        if (modal.getAttribute('aria-hidden') === 'true') {
+            if (playBtn) playBtn.classList.remove('is-playing');
+            if (inView) {
+                video.muted = true;
+                video.play().catch(() => {});
+            }
+        }
+    }
+
+    if (playBtn) {
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openFactsModal();
+        });
+    }
+
+    if (shell) {
+        shell.addEventListener('click', (e) => {
+            if (e.target.closest('.facts__play')) return;
+            openFactsModal();
+        });
+    }
+
+    // Отслеживаем закрытие модалки, чтобы вернуть превью
+    const observerModal = new MutationObserver(handleCloseFromOutside);
+    if (modal) {
+        observerModal.observe(modal, { attributes: true, attributeFilter: ['aria-hidden'] });
+    }
+}
+
+/**
  * Live time display - Novogrudok & Grodno (like Jonite US/Singapore)
  */
 function initTimeDisplay() {
@@ -320,6 +544,35 @@ function initHeader() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
+}
+
+/**
+ * Back to top button
+ */
+function initBackToTop() {
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+
+    const showOffset = 400;
+
+    function onScroll() {
+        if (window.scrollY > showOffset) {
+            btn.classList.add('back-to-top--visible');
+        } else {
+            btn.classList.remove('back-to-top--visible');
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    btn.addEventListener('click', () => {
+        if (window.lenis) {
+            window.lenis.scrollTo(0, { offset: 0 });
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
 }
 
 /**
@@ -499,7 +752,7 @@ function initPhotoModal() {
     const modalImg = document.getElementById('photoModalImg');
     const closeBtn = document.getElementById('photoModalClose');
     const backdrop = document.getElementById('photoModalBackdrop');
-    const photos = document.querySelectorAll('.gallery-ladder__img');
+    const photos = document.querySelectorAll('.gallery-ladder__img, .photo-stack__img, .facts-photo img');
 
     if (!modal || !modalImg || !photos.length) return;
 
